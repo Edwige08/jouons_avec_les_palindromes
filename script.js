@@ -1,3 +1,4 @@
+// Fonction donnant le nombre de jours maximum dans chaque mois :
 const maxDaysInMonth = (mois) => {
     if (((mois%2 !== 0) && (mois < 8)) || ((mois%2 == 0) && (mois > 7) && (mois < 13))) {
         return "31";
@@ -10,6 +11,7 @@ const maxDaysInMonth = (mois) => {
     }
 }
 
+// Fonction qui vérifie si la date donnée est bien valide : 
 const isValidDate = (dateString) => {
     if (dateString.length == 10) {
         if (dateString.substr(0, 2) < (maxDaysInMonth(dateString.substr(3, 2)))) {
@@ -22,22 +24,22 @@ const isValidDate = (dateString) => {
     }
 }
 
+// Fonction qui vérifie si c'est un palindrome : 
 const isPalindrome = (dateString) => {
-    if ((dateString.substr(0, 1) === dateString.substr(9, 1)) && (dateString.substr(1, 1) === dateString.substr(8, 1)) && (dateString.substr(3, 1) === dateString.substr(7, 1)) && (dateString.substr(4, 1) === dateString.substr(6, 1))) {
-        return true
+    const dateNoSlash = dateString.split('/').join('');
+    for (let x = 0 ; x < dateNoSlash.length ; x++) {
+        if (dateNoSlash[x] !== dateNoSlash[dateNoSlash.length - 1 - x]) {
+            return false
+        }
     }
-    return false;
+    return true;
 }
 
-// Tests des fonctions : --------------------------------------------
-invalidDateTestDay = "31/11/2023";
-invalidDateTestMonth = "22/22/2012";
-invalidDateTestYear = "11/02/990";
-validDateTest = "18/03/2475";
-palindromeDateTest = "22/02/2022"
-console.log("Date valide : " + isValidDate(validDateTest));
-console.log("Mauvais jour : " + isValidDate(invalidDateTestDay));
-console.log("Mauvais mois : " + isValidDate(invalidDateTestMonth));
-console.log("Mauvaise année : " + isValidDate(invalidDateTestYear));
-console.log("Doit retourner false : " + isPalindrome(validDateTest))
-console.log("Doit retourner true : " + isPalindrome(palindromeDateTest))
+// Fonction qui vérifie si une date est valide et si elle est un palindrome :
+const isDatePalindrome = (dateToTest) => {
+    if (isValidDate) {
+        return isPalindrome(dateToTest);
+    } else {
+        console.log("Attention, vous n'avez pas saisi une date valide.")
+    }
+}
